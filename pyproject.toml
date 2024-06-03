@@ -13,8 +13,18 @@ rauth = "^0.7.3"
 fastai = "^2.7.15"
 yarl = "^1.9.4"
 python-dotenv = "^1.0.1"
+argparse = "^1.4.0"
 
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.4.2"
+ruff = "^0.4.7"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 120
+use-tabs = true
+indent-width = 2

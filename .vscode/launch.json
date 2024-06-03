@@ -8,7 +8,15 @@
       "name": "Debug Import",
       "type": "debugpy",
       "request": "launch",
-      "program": "import.py",
+      "program": "./scripts/import.py",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Debug CLI Import",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "./cli.py",
+      "args": ["import"],
       "console": "integratedTerminal"
     }
   ]
