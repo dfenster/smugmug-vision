@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 from yarl import URL
 import sys
 from pprint import pprint
+from pathlib import Path
 
 OAUTH_ORIGIN = 'https://secure.smugmug.com'
 REQUEST_TOKEN_URL = OAUTH_ORIGIN + '/services/oauth/1.0a/getRequestToken'
@@ -82,4 +83,14 @@ class SmugMugClient():
 					index += album["ImageCount"]
 
 			return None
+	
+	def download_and_classify_image(self, image, category, size="Medium", file_path="import"):
+		size_url = image["Uris"]["LargestImage"]["Uri"]
+		response = self.session.get(f"{API_ORIGIN}{size_url}", params={"s": size})
+		response.raise_for_status()
 
+		directory = Path(f"{file_path}/{category}")
+		directory.mkdir(parents=True, exist_ok=True)
+
+		with open(f"{file_path}/{category}/{image["FileName"]}", 'wb') as file:
+			file.write(response.content)
